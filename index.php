@@ -42,9 +42,9 @@
             ));
 
             $user = json_decode(curl_exec($ch),false);
-            var_dump($user)."<br>"; 
+            var_dump($user); 
 ?>
-            <a href="<?php echo '/dev/cometland/?logout=1&access_token='.$_GET['access_token'] ?>"><button type="button" class="btn btn-primary"><i class="fab fa-discord"></i> Logout</button></a>
+            <br><a href="<?php echo '/dev/cometland/?logout=1&access_token='.$_GET['access_token'] ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
 <?php
         }
     }
