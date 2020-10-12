@@ -13,8 +13,9 @@
   </head>
   <body>
     <?php 
+    session_start();
     
-    if (isset($_GET['access_token']))
+    if (isset($_SESSION['authorisation']))
     {
         if (isset($_GET['logout']) && $_GET['logout'] == 1)
         {
@@ -24,11 +25,12 @@
             $fields = [
                 'client_id' => $config->getClientId(),
                 'client_secret' => $config->getClientSecret(),
-                'token' => $_GET['access_token']
+                'token' => $_SESSION['authorisation']->access_token
             ];
             curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
             
             curl_exec($ch);
+            session_destroy();
 
             header('Location: /dev/cometland/');
         }
@@ -38,13 +40,13 @@
 
             curl_setopt($ch,CURLOPT_URL, "https://discord.com/api/users/@me");
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization: Bearer '.$_GET['access_token']
+                'Authorization: Bearer '.$_SESSION['authorisation']->access_token
             ));
 
             $user = json_decode(curl_exec($ch),false);
             var_dump($user); 
 ?>
-            <br><a href="<?php echo '/dev/cometland/?logout=1&access_token='.$_GET['access_token'] ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
+            <br><a href="<?php echo '/dev/cometland/?logout=1' ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
 <?php
         }
     }

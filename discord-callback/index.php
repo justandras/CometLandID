@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     require_once("../includes/include-all.php");
 
     $ch = curl_init();
@@ -17,6 +19,8 @@
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 
     $authorisation = json_decode(curl_exec($ch),false);
-    header('Location: /dev/cometland/?access_token='.$authorisation->access_token);
-    exit;
+
+    $_SESSION['authorisation'] = $authorisation;
+
+    header('Location: /dev/cometland/');
 ?>
