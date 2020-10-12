@@ -1,5 +1,5 @@
 <?php
-    include "../includes/include-all.php";
+    require_once("../includes/include-all.php");
 
     $ch = curl_init();
 

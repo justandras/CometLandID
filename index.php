@@ -1,4 +1,4 @@
-<?php include "includes/include-all.php"?>
+<?php require_once("includes/include-all.php")?>
 
 <!doctype html>
 <html lang="en">
