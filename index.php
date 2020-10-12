@@ -14,6 +14,10 @@
   <body>
     <?php 
     session_start();
+    if (!isset($_SESSION['locale'])){
+      $_SESSION['locale'] = "en-us";
+    }
+    $localeLoader = new LocaleLoader($_SESSION['locale']);
     
     if (isset($_SESSION['authorisation']))
     {
@@ -42,17 +46,17 @@
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Authorization: Bearer '.$_SESSION['authorisation']->access_token
             ));
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 
             $user = json_decode(curl_exec($ch),false);
-            var_dump($user); 
-?>
-            <br><a href="<?php echo '/dev/cometland/?logout=1' ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button></a>
+            $localeLoader->loadLocale($user->locale);
+?><a href="<?php echo '/dev/cometland/?logout=1' ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> <?php $localeLoader->echoString("logout")?></button></a>
 <?php
         }
     }
     else{
     ?>
-    <a href="<?php echo $config->getRedirectUrl()?>"><button type="button" class="btn btn-primary"><i class="fab fa-discord"></i> Login with Discord</button></a>
+    <a href="<?php echo $config->getRedirectUrl()?>"><button type="button" class="btn btn-primary"><i class="fab fa-discord"></i> <?php $localeLoader->echoString("login")?></button></a>
     <?php }?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
