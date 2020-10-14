@@ -12,7 +12,7 @@
         'client_secret' => $config->getClientSecret(),
         'grant_type' => "authorization_code",
         'code'=> $_GET["code"],
-        'redirect_uri' => $config->getRedirectUri(),
+        'redirect_uri' => strtok((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",'?'),
         'scope' => $config->getScope()
     ];
     curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
@@ -21,6 +21,5 @@
     $authorisation = json_decode(curl_exec($ch),false);
 
     $_SESSION['authorisation'] = $authorisation;
-
     header('Location: /dev/cometland/');
 ?>

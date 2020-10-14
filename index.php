@@ -1,4 +1,6 @@
-<?php require_once("includes/include-all.php")?>
+<?php 
+  require_once("includes/include-all.php");
+?>
 
 <!doctype html>
 <html lang="en">
@@ -50,7 +52,7 @@
 
             $user = json_decode(curl_exec($ch),false);
             $localeLoader->loadLocale($user->locale);
-?><a href="<?php echo '/dev/cometland/?logout=1' ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> <?php $localeLoader->echoString("logout")?></button></a>
+?><a href="<?php echo $config->getAppPath().'?logout=1' ?>"><button type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> <?php $localeLoader->echoString("logout")?></button></a>
 <?php
         }
     }
