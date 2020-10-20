@@ -21,5 +21,5 @@
     $authorisation = json_decode(curl_exec($ch),false);
 
     $_SESSION['authorisation'] = $authorisation;
-    header('Location: /dev/cometland/');
+    header('Location: '.$config->getAppPath());
 ?>

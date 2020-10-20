@@ -38,7 +38,7 @@
             curl_exec($ch);
             session_destroy();
 
-            header('Location: /dev/cometland/');
+            header('Location: '.$config->getAppPath());
         }
         else
         {        
