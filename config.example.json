@@ -2,7 +2,9 @@
     "app_path": "",
     "redirect_url":"",
     "scope":"",
+    "default_locale": "en_us",
 
     "client_id":"",
-    "client_secret":""
+    "client_secret":"",
+    "bot_token":""
 }

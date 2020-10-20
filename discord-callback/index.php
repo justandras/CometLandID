@@ -21,5 +21,10 @@
     $authorisation = json_decode(curl_exec($ch),false);
 
     $_SESSION['authorisation'] = $authorisation;
+
+    $dapi = new DiscordApi($config->getBotToken());
+
+    $_SESSION['locale'] = $dapi->getUser()->locale;
+
     header('Location: '.$config->getAppPath());
 ?>

@@ -5,6 +5,8 @@
         private $client_id;
         private $client_secret;
         private $scope;
+        private $bot_token;
+        private $default_locale;
 
         function __construct($path){
             $jsonConfig = file_get_contents($path);
@@ -15,6 +17,8 @@
             $this->client_secret = $decodedConfig->client_secret;
             $this->redirect_url = $decodedConfig->redirect_url;
             $this->scope = $decodedConfig->scope;
+            $this->bot_token = $decodedConfig->bot_token;
+            $this->default_locale = $decodedConfig->default_locale;
         }
 
         function getAppPath(){
@@ -31,6 +35,12 @@
         }
         function getScope(){
             return $this->scope;
+        }
+        function getBotToken(){
+            return $this->bot_token;
+        }
+        function getDefaultLocale(){
+            return $this->default_locale;
         }
     }
 ?>
